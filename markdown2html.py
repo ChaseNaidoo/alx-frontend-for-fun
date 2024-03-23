@@ -1,27 +1,19 @@
 #!/usr/bin/python3
 """
-This is a script to convert a Markdown file to HTML.
-
 Usage:
     ./markdown2html.py [input_file] [output_file]
-
 Arguments:
     input_file: the name of the Markdown file to be converted
     output_file: the name of the output HTML file
-
-Example:
-    ./markdown2html.py README.md README.html
 """
 
 import argparse
 import pathlib
 import re
-
+import sys
 
 def convert_md_to_html(input_file, output_file):
-    '''
-    Converts markdown file to HTML file
-    '''
+    """Converts markdown file to HTML file"""
     # Read the contents of the input file
     with open(input_file, encoding='utf-8') as f:
         md_content = f.readlines()
@@ -44,7 +36,6 @@ def convert_md_to_html(input_file, output_file):
     with open(output_file, 'w', encoding='utf-8') as f:
         f.writelines(html_content)
 
-
 if __name__ == '__main__':
     # Parse command-line arguments
     parser = argparse.ArgumentParser(description='Convert markdown to HTML')
@@ -55,9 +46,8 @@ if __name__ == '__main__':
     # Check if the input file exists
     input_path = pathlib.Path(args.input_file)
     if not input_path.is_file():
-        print(f'Missing {input_path}', file=sys.stderr)
+        print(f'Missing {args.input_file}', file=sys.stderr)
         sys.exit(1)
 
     # Convert the markdown file to HTML
     convert_md_to_html(args.input_file, args.output_file)
-
